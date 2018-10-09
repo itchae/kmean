@@ -20,6 +20,14 @@ public class Data {
         this.cluster = cluster;
     }
 
+    public Double getx(){
+        return coord.getKey(); 
+    }
+
+    public Double gety(){
+        return coord.getValue(); 
+    }
+
     public Cluster getCluster() {
         return this.cluster;
     }

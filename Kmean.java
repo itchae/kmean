@@ -25,6 +25,10 @@ public class Kmean {
         initClusters();
     }
 
+    public void initData() {
+
+    }
+
     // Initialisation des clusters aléatoire
     public void initClusters() {
         Random r = new Random();
@@ -38,7 +42,7 @@ public class Kmean {
 
         // Calcul de la distance
         for (int i = 0; i < nbPoint; i++) { // Pour chaque point
-            double clusterPlusProche;
+            int clusterPlusProche = 0;
             for (int j = 0; j < nbClusters; j++) { // Pour chaque cluster
                 double distanceMin;
                 double distanceCalculee;
@@ -47,30 +51,30 @@ public class Kmean {
                 double x2 = this.dataSet.get(j).getx();
                 double y2 = this.dataSet.get(j).gety();
                 distanceCalculee = Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
-
+                distanceMin = distanceCalculee;
                 // Si premier tour de boucle ou que distance plus petite
                 if (j == 0 || distanceMin > distanceCalculee) {
                     distanceMin = distanceCalculee;
-                    this.dataSet.get(i).setCluster(j);
+                    this.dataSet.get(i).setCluster(this.clusterSet.get(j));
                     clusterPlusProche = j;
                 }
             }
             // Si on change quelque chose ici, il faut mettre le boolean à True
-            this.clusterSet[clusterPlusProche].add(this.dataSet[i]);
+            this.clusterSet.get(clusterPlusProche).dataSet.add(this.dataSet.get(i));
         }
     }
 
     // Calcul de la moyenne de points
     public void calculBarycentre() {
         for (int i = 0; i < nbClusters; i++) {
-            int xtot;
-            int ytot;
-            int nbPt = this.clusterSet[i].dataSet.size();
+            Double xtot = 0.0;
+            Double ytot = 0.0;
+            int nbPt = this.clusterSet.get(i).dataSet.size();
             for (int j = 0; j < nbPt; j++) {
-                xtot += this.clusterSet.get(i).dataSet.get(j).getx;
-                ytot += this.clusterSet.get(i).dataSet.get(j).gety;
+                xtot += this.clusterSet.get(i).dataSet.get(j).getx();
+                ytot += this.clusterSet.get(i).dataSet.get(j).gety();
             }
-            this.clusterSet[i].setCenter(xtot / nbPt, ytot / nbPt);
+            this.clusterSet.get(i).setCenter(xtot / nbPt, ytot / nbPt);
         }
     }
 }

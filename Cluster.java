@@ -12,4 +12,8 @@ class Cluster {
         this.centerx = x;
         this.centery = y;
     }
+
+    public void setCenter(double x, double y){
+        //TODO
+    }
 }
