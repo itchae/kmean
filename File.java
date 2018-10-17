@@ -8,14 +8,14 @@ public class File {
 
     public static final String FILENAME = "results.txt";
     public int parseFile(Kmean k,FileReader file){
-        int nbPoints;
+        int nbPoints =0;
         Scanner scanner1 = new Scanner(file);
-        Scanner scanner2 = new Scanner(file);
-        scanner2.nextLine();
-        while (scanner1.hasNext() && scanner2.hasNext()) {
-            double value1 = scanner1.nextDouble();
-            double value2 = scanner2.nextDouble();
-            k.dataSet.add(new Data(value1, value2));
+        String lineX = scanner1.nextLine();
+        String lineY = scanner1.nextLine();
+        String[] resX = lineX.split(" +");
+        String[] resY = lineX.split(" +");
+        for (int i=0; i<=resX.length;i++){
+            k.dataSet.add(new Data(resX[i], resY[i]));
             nbPoints++;
         }
         return nbPoints;
