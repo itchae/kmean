@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 
 public class File {
 
-    public static final String FILENAME = "C:\\Users\\tbonnion\\Desktop";
+    public static final String FILENAME = "results.txt";
     public int parseFile(Kmean k,FileReader file){
         int nbPoints;
 		Scanner scanner1 = new Scanner(file);
@@ -21,7 +21,7 @@ public class File {
 	}
 
     public void writeInFile(Kmean k) {
-        PrintWriter pw = new PrintWriter(FILENAME);
+        PrintWriter pw = new PrintWriter(FILENAME, "UTF-8");
         String xData = "";
         String yData ="";
         String clusterData="";
@@ -32,7 +32,9 @@ public class File {
             clusterData =+ data.getCluster().getnCluster() + " ";
         }
 
-        pw.print(xData +"\n"+yData+"\n"+clusterData);
+        pw.println(xData);
+        pw.println(yData);
+        pw.println(clusterData);
         
     }
 }
