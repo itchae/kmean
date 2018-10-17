@@ -18,15 +18,12 @@ public class File {
         System.out.println("Parsefile");
         int nbPoints = 0;
         Scanner scanner1 = new Scanner(file);
-        Scanner scanner2 = new Scanner(file);
-        scanner2.nextLine();
-        System.out.println("mlqlmdlm");
-        while (scanner1.hasNext() && scanner2.hasNext()){
-            double value1 = scanner1.nextDouble();
-            System.out.println(value1);
-            double value2 = scanner2.nextDouble();
-            System.out.println("@@@@@@@@@@@@@@@@@@");
-            k.dataSet.add(new Data(value1, value2));
+        String lineX = scanner1.nextLine();
+        String lineY = scanner1.nextLine();
+        String[] resX = lineX.split(" +");
+        String[] resY = lineX.split(" +");
+        for (int i=0; i<=resX.length;i++){
+            k.dataSet.add(new Data(Double.parseDouble(resX[i]), Double.parseDouble(resY[i])));
             nbPoints++;
         }
         return nbPoints;

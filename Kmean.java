@@ -17,11 +17,16 @@ public class Kmean {
 
     public Kmean(int nbCluster) {
         this.nbClusters = nbCluster;
-        this.nbPoint = 0;
+        this.nbPoint = 2;
         this.isChanged = false;
         this.clusterSet = new ArrayList<Cluster>();
         this.dataSet = new ArrayList<Data>();
+        initData();
         initClusters();
+    }
+
+    public void initData() {
+
     }
 
     // Initialisation des clusters aléatoire
