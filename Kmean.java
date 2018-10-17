@@ -39,10 +39,11 @@ public class Kmean {
 
     // Calcul et association du cluster le plus proche
     public void calculClusterPlusProche() {
-
+        this.isChanged = false;
         // Calcul de la distance
         for (int i = 0; i < nbPoint; i++) { // Pour chaque point
             int clusterPlusProche = 0;
+
             for (int j = 0; j < nbClusters; j++) { // Pour chaque cluster
                 double distanceMin;
                 double distanceCalculee;
@@ -57,6 +58,7 @@ public class Kmean {
                     distanceMin = distanceCalculee;
                     this.dataSet.get(i).setCluster(this.clusterSet.get(j));
                     clusterPlusProche = j;
+                    this.isChanged = true;
                 }
             }
             // Si on change quelque chose ici, il faut mettre le boolean à True
