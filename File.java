@@ -1,6 +1,8 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.FileReader;
+import java.util.Scanner;
 
 public class File {
 
