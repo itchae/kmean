@@ -3,12 +3,15 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+
+import java.io.UnsupportedEncodingException;
 
 public class File {
 
     public static final String FILENAME = "results.txt";
     public int parseFile(Kmean k,FileReader file){
-        int nbPoints;
+        int nbPoints = 0;
         Scanner scanner1 = new Scanner(file);
         Scanner scanner2 = new Scanner(file);
         scanner2.nextLine();
@@ -22,7 +25,7 @@ public class File {
 
     }
 
-    public void writeInFile(Kmean k) {
+    public void writeInFile(Kmean k) throws FileNotFoundException, UnsupportedEncodingException{
         PrintWriter pw = new PrintWriter(FILENAME, "UTF-8");
         String xData = "";
         String yData = "";
