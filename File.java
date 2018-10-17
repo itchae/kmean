@@ -15,7 +15,7 @@ public class File {
         String[] resX = lineX.split(" +");
         String[] resY = lineX.split(" +");
         for (int i=0; i<=resX.length;i++){
-            k.dataSet.add(new Data(resX[i], resY[i]));
+            k.dataSet.add(new Data(Double.parseDouble(resX[i]), Double.parseDouble(resY[i])));
             nbPoints++;
         }
         return nbPoints;
