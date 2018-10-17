@@ -2,22 +2,30 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+
+import java.util.Scanner;
+
+
+
 
 public class File {
 
     public static final String FILENAME = "results.txt";
     public int parseFile(Kmean k,FileReader file){
+        System.out.println("Parsefile");
         int nbPoints = 0;
         Scanner scanner1 = new Scanner(file);
         Scanner scanner2 = new Scanner(file);
         scanner2.nextLine();
-        while (scanner1.hasNext() && scanner2.hasNext()) {
+        System.out.println("mlqlmdlm");
+        while (scanner1.hasNext() && scanner2.hasNext()){
             double value1 = scanner1.nextDouble();
+            System.out.println(value1);
             double value2 = scanner2.nextDouble();
+            System.out.println("@@@@@@@@@@@@@@@@@@");
             k.dataSet.add(new Data(value1, value2));
             nbPoints++;
         }
