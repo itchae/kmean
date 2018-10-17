@@ -7,6 +7,7 @@ class Cluster {
     ArrayList<Data> dataSet;
     double centerx;
     double centery;
+    int nCluster;
 
     public Cluster(double x, double y) {
         this.centerx = x;
@@ -14,6 +15,15 @@ class Cluster {
     }
 
     public void setCenter(double x, double y){
-        //TODO
+        this.centerx = x;
+        this.centery = y;
+    
+    }
+    public int getnCluster(){
+        return this.nCluster;
+    }
+    
+    public void setnCluster(int n){
+        this.nCluster = n;
     }
 }
