@@ -9,21 +9,24 @@ class Cluster {
     double centery;
     int nCluster;
 
-    public Cluster(double x, double y) {
+    public Cluster(double x, double y, int nCluster) {
         this.centerx = x;
         this.centery = y;
+        this.nCluster = nCluster;
     }
 
-    public void setCenter(double x, double y){
+    public void setCenter(double x, double y) {
         this.centerx = x;
         this.centery = y;
-    
+
     }
-    public int getnCluster(){
+
+    public int getnCluster() {
         return this.nCluster;
     }
-    
-    public void setnCluster(int n){
+
+    public void setnCluster(int n) {
         this.nCluster = n;
     }
+
 }

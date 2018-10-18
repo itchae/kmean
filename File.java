@@ -22,8 +22,9 @@ public class File {
         String lineY = scanner1.nextLine();
         String[] resX = lineX.split(" +");
         String[] resY = lineX.split(" +");
-        for (int i=0; i<=resX.length;i++){
+        for (int i=0; i<resX.length;i++){
             k.dataSet.add(new Data(Double.parseDouble(resX[i]), Double.parseDouble(resY[i])));
+            //System.out.println(resX[i]);
             nbPoints++;
         }
         return nbPoints;
@@ -39,7 +40,7 @@ public class File {
         for (Data data : k.dataSet) {
             xData = +data.getx() + " ";
             yData = +data.gety() + " ";
-            clusterData = +data.getCluster().getnCluster() + " ";
+            clusterData =+ data.getCluster().getnCluster() + " ";
         }
 
         pw.print(xData +"\n"+yData+"\n"+clusterData);

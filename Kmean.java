@@ -21,19 +21,31 @@ public class Kmean {
         this.isChanged = false;
         this.clusterSet = new ArrayList<Cluster>();
         this.dataSet = new ArrayList<Data>();
-        initData();
         initClusters();
     }
 
-    public void initData() {
-
+    public void printCluster() {
+        for (Cluster c : clusterSet) {
+            System.out.println("Center x : "+ c.centerx);
+            System.out.println("center y : "+ c.centery);
+            System.out.println("Nb : "+ + c.nCluster);
+        }
     }
 
-    // Initialisation des clusters aléatoire
+    public void printDataSet() {
+        for (Data d : dataSet) {
+            System.out.println(d.getx());
+            System.out.println(d.gety());
+            System.out.println(d.cluster);
+        }
+    }
+
+    // Initialisation des clusters aléatoiref
     public void initClusters() {
         Random r = new Random();
         for (int i = 0; i < this.nbClusters; i++) {
-            this.clusterSet.add(new Cluster(r.nextDouble() * XMAX, r.nextDouble() * YMAX));
+            System.out.println("Create cluster"+i);
+            this.clusterSet.add(new Cluster(r.nextDouble() * XMAX, r.nextDouble() * YMAX, i));
         }
     }
 
@@ -56,7 +68,7 @@ public class Kmean {
                 // Si premier tour de boucle ou que distance plus petite
                 if (j == 0 || distanceMin > distanceCalculee) {
                     distanceMin = distanceCalculee;
-                    this.dataSet.get(i).setCluster(this.clusterSet.get(j));
+                    this.dataSet.get(i).setCluster(j);
                     clusterPlusProche = j;
                     this.isChanged = true;
                 }

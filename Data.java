@@ -5,30 +5,33 @@ import javafx.util.Pair;
 import java.lang.*;
 
 public class Data {
-    Pair<Double,Double>coord;
-    Cluster cluster;
+    Pair<Double, Double> coord;
+    // Cluster cluster;
+    int cluster;
 
     public Data(Double x, Double y) {
         this.coord = new Pair(x, y);
+        this.cluster = 1;
+        // this.cluster = new Cluster();
     }
 
-    public Pair<Double,Double> getCoord(){
+    public Pair<Double, Double> getCoord() {
         return this.coord;
     }
 
-    public void setCluster(Cluster cluster) {
+    public void setCluster(int cluster) {
         this.cluster = cluster;
     }
 
-    public Double getx(){
-        return coord.getKey(); 
+    public Double getx() {
+        return coord.getKey();
     }
 
-    public Double gety(){
-        return coord.getValue(); 
+    public Double gety() {
+        return coord.getValue();
     }
 
-    public Cluster getCluster() {
+    public int getCluster() {
         return this.cluster;
     }
 
