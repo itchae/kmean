@@ -5,22 +5,14 @@ import javafx.util.Pair;
 import java.lang.*;
 
 public class Data {
-    Pair<Double, Double> coord;
-    // Cluster cluster;
-    int cluster;
+    public Pair<Double, Double> coord;
 
     public Data(Double x, Double y) {
         this.coord = new Pair(x, y);
-        this.cluster = 1;
-        // this.cluster = new Cluster();
     }
 
     public Pair<Double, Double> getCoord() {
         return this.coord;
-    }
-
-    public void setCluster(int cluster) {
-        this.cluster = cluster;
     }
 
     public Double getx() {
@@ -31,8 +23,21 @@ public class Data {
         return coord.getValue();
     }
 
-    public int getCluster() {
-        return this.cluster;
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (o instanceof Data) {
+            Data d = (Data) o;
+
+            if (this.getx() == d.getx() && this.gety() == d.gety()) {
+                result = true;
+            }
+        }
+        return result;
     }
 
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new int[] { (int) Math.round(this.getx()), (int) Math.round(this.gety()) });
+    }
 }
