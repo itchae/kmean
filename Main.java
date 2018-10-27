@@ -1,5 +1,6 @@
 import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 import java.io.FileNotFoundException;
 
 public class Main {
@@ -36,10 +37,11 @@ public class Main {
                 i++;
             }
         }
-
+        
         // kmean.printCluster();
         // kmean.printDataSet();
-        // f.writeInFile(kmean);
+        f.writeInFile(kmean);
 
     }
 }
+
