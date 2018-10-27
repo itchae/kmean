@@ -13,12 +13,6 @@ public class Kmean {
     public ArrayList<Cluster> clusterSet;
     public HashMap<Data, Cluster> map;
 
-    public static final double XMAX = 5;
-    public static final double YMAX = 5;
-
-    public static final double XMIN = 0;
-    public static final double YMIN = 0;
-
     public Kmean(int nbCluster) {
         this.nbClusters = nbCluster;
         this.nbPoint = 2;
@@ -33,50 +27,53 @@ public class Kmean {
         Random r = new Random();
         if (this.nbPoint >= this.nbClusters) {
             for (int i = 0; i < this.nbClusters; i++) {
-                // System.out.println("Create cluster" + i);
-                this.clusterSet.add(
-                        new Cluster(XMIN + r.nextDouble() * (XMAX - XMIN), YMIN + r.nextDouble() * (YMAX - YMIN), i));
+                System.out.println("Create cluster" + i);
+                int numeroPoint = r.nextInt(nbPoint)/* %nbPoint */;
+                System.out.println("Point numero : " + numeroPoint);
+                Data d = this.dataSet.get(numeroPoint);
+                this.clusterSet.add(new Cluster(d.getx(), d.gety(), i));
+                System.out.println(d.getx() + "    " + d.gety());
             }
             return true;
-        }else{
+        } else {
             return false;
         }
 
     }
 
     public void initHash() {
-        //Placer un point dans chaque cluster
-        if (this.clusterSet.size() > 0) {
-            int numero = 0;
-            for( int i = 0 ; i<this.nbPoint ; i++){
-                this.map.put(this.dataSet.get(i), this.clusterSet.get(numero));
-                this.clusterSet.get(numero).nbPoint++;
-                if(numero<this.nbClusters-1){
-                    numero++;
-                }else{
-                    numero=0;
+        for (int i = 0; i < nbPoint; i++) { // Pour chaque point
+            int clusterPlusProche = 0;
+            double distanceMin = this.distance(this.clusterSet.get(0).centerx, this.clusterSet.get(0).centery,
+                    this.dataSet.get(i).getCoord());
+            System.out.println("Point " + i + " Dist min : " + distanceMin);
+            this.map.put(this.dataSet.get(i), this.clusterSet.get(0));
+            for (int j = 0; j < nbClusters; j++) { // Pour chaque cluster
+                double distanceCalculee;
+                double dx = this.dataSet.get(i).getx();
+                double dy = this.dataSet.get(i).gety();
+                double cx = this.clusterSet.get(j).centerx;
+                double cy = this.clusterSet.get(j).centery;
+                distanceCalculee = this.distance(cx, cy, this.dataSet.get(i).getCoord());
+                System.out.println("Dist calculée : " + distanceCalculee);
+                if (distanceMin > distanceCalculee /* & ancien.nbPoint > 1 */) {
+                    distanceMin = distanceCalculee;
+                    System.out.println("Je suis plus proche de " + this.clusterSet.get(j).getnCluster());
+                    this.map.put(this.dataSet.get(i), this.clusterSet.get(j));
+                    this.isChanged = true;
                 }
             }
-            /*for (Data d : this.dataSet) {
-                System.out.println(d);
-                System.out.println(this.clusterSet.get(numero));
-                this.map.put(d, this.clusterSet.get(numero));
-                this.clusterSet.get(numero).nbPoint++;
-                if(numero<this.nbClusters){
-                    numero++;
-                }else{
-                    numero=0;
-                }
-            }*/
-
-        } else {
-            System.out.println("Cluster vide");
         }
     }
 
-
-
     public double distance(double cx, double cy, Pair<Double, Double> p) {
+        // System.out.println("Calcul de la distance ....");
+        // System.out.println("Point : " + p.getValue() + " "+ p.getKey());
+        // System.out.println("Cluster : " + cx + " " + cy);
+        // System.out.println(Math.pow(cy - p.getValue(), 2));
+        // System.out.println(Math.pow(cx - p.getKey(), 2));
+        // System.out.println(Math.sqrt(Math.pow(cy - p.getValue(), 2) + Math.pow(cx -
+        // p.getKey(), 2)));
         return Math.sqrt(Math.pow(cy - p.getValue(), 2) + Math.pow(cx - p.getKey(), 2));
     }
 
@@ -86,30 +83,46 @@ public class Kmean {
         this.isChanged = false;
         // Calcul de la distance
         for (int i = 0; i < nbPoint; i++) { // Pour chaque point
-            System.out.println("Point " + i);
+            // System.out.println("Point " + i);
             int clusterPlusProche = 0;
-            double distanceMin = this.distance(this.map.get(this.dataSet.get(i)).centerx,
-                    this.map.get(this.dataSet.get(i)).centery, this.dataSet.get(i).getCoord());
+            double distanceMin = this.distance(this.clusterSet.get(0).centerx, this.clusterSet.get(0).centery,
+                    this.dataSet.get(i).getCoord());
+            // System.out.println("Pointx "+ this.dataSet.get(i).getx());
+            // System.out.println("Pointy "+ this.dataSet.get(i).gety());
+            if (!this.map.containsKey(this.dataSet.get(i))) {
+                System.out.println("Je n'ai pas la clé");
+                this.map.put(this.dataSet.get(i), this.clusterSet.get(0));
+
+                distanceMin = this.distance(this.clusterSet.get(0).centerx, this.clusterSet.get(0).centery,
+                        this.dataSet.get(i).getCoord());
+            } else {
+                Cluster c = this.map.get(this.dataSet.get(i));
+                distanceMin = this.distance(c.centerx, c.centery, this.dataSet.get(i).getCoord());
+            }
+
             for (int j = 0; j < nbClusters; j++) { // Pour chaque cluster
-                System.out.println("Cluster " + j);
+                // System.out.println("Cluster " + j);
                 double distanceCalculee;
                 double dx = this.dataSet.get(i).getx();
                 double dy = this.dataSet.get(i).gety();
                 double cx = this.clusterSet.get(j).centerx;
+                // System.out.println("CenterX " + this.clusterSet.get(j).centerx);
                 double cy = this.clusterSet.get(j).centery;
-                distanceCalculee = this.distance(cx, cy, dataSet.get(i).getCoord());
+                // System.out.println("CenterY " + this.clusterSet.get(j).centery);
+                distanceCalculee = this.distance(cx, cy, this.dataSet.get(i).getCoord());
+                System.out.println("Dist calculée : " + distanceCalculee);
                 // distanceCalculee = Math.sqrt((cy - dy) * (cy - dy) + (cx - dx) * (cx - dx));
                 // Si premier tour de boucle ou que distance plus petite
-                Cluster ancien = this.map.get(this.dataSet.get(i));
-                if (distanceMin > distanceCalculee & ancien.nbPoint > 1) {
+                // Cluster ancien = this.map.get(this.dataSet.get(i));
+                if (distanceMin > distanceCalculee /* & ancien.nbPoint > 1 */) {
                     distanceMin = distanceCalculee;
                     System.out.println("Je suis plus proche de " + this.clusterSet.get(j).getnCluster());
                     // Put met a jour car on ne peut pas avoir deux clés de même valeur
                     this.map.put(this.dataSet.get(i), this.clusterSet.get(j));
                     this.isChanged = true;
-                    ancien.nbPoint--;
-                    this.clusterSet.get(j).nbPoint++;
-                    //TODO : Vérifier que chaque cluster ai au moins un point
+                    // ancien.nbPoint--;
+                    // this.clusterSet.get(j).nbPoint++;
+                    // TODO : Vérifier que chaque cluster ai au moins un point
                 }
             }
         }
@@ -162,7 +175,7 @@ public class Kmean {
             System.out.println("Center x : " + c.centerx);
             System.out.println("center y : " + c.centery);
             System.out.println("Nb : " + +c.nCluster);
-            System.out.println("Nombre de points : "+c.nbPoint);
+            System.out.println("Nombre de points : " + c.nbPoint);
         }
 
     }
@@ -171,7 +184,6 @@ public class Kmean {
 
         System.out.println("AFFICHAGE DES POINTS");
         for (Data d : dataSet) {
-         
 
             System.out.println(d.gety());
         }
