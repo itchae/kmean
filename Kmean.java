@@ -40,12 +40,12 @@ public class Kmean {
         Random r = new Random();
         if (this.nbPoint >= this.nbClusters) {
             for (int i = 0; i < this.nbClusters; i++) {
-                System.out.println("Create cluster" + i);
+                //System.out.println("Create cluster" + i);
                 int numeroPoint = r.nextInt(nbPoint)/* %nbPoint */;
-                System.out.println("Point numero : " + numeroPoint);
+                //System.out.println("Point numero : " + numeroPoint);
                 Data d = this.dataSet.get(numeroPoint);
                 this.clusterSet.add(new Cluster(d.getx(), d.gety(), i));
-                System.out.println(d.getx() + "    " + d.gety());
+                //System.out.println(d.getx() + "    " + d.gety());
             }
             return true;
         } else {
@@ -87,7 +87,7 @@ public class Kmean {
 
     // Calcul et association du cluster le plus proche
     public void calculClusterPlusProche() {
-        System.out.println("Calcul Cluster le plus proche");
+        //System.out.println("Calcul Cluster le plus proche");
         this.isChanged = false;
         // Calcul de la distance
         for (int i = 0; i < nbPoint; i++) { // Pour chaque point
@@ -133,7 +133,7 @@ public class Kmean {
 
     // Calcul de la moyenne de points
     public void calculBarycentre() {
-        System.out.println("Calcul Barycentre");
+        //System.out.println("Calcul Barycentre");
         for (int i = 0; i < nbClusters; i++) {
             Double xtot = 0.0;
             Double ytot = 0.0;
@@ -167,12 +167,12 @@ public class Kmean {
     }
 
     public void printCluster() {
-        System.out.println("AFFICHAGE DU CLUSTER");
+        //System.out.println("AFFICHAGE DU CLUSTER");
         for (Cluster c : clusterSet) {
-            System.out.println("Center x : " + c.centerx);
-            System.out.println("center y : " + c.centery);
-            System.out.println("Nb : " + +c.nCluster);
-            System.out.println("Nombre de points : " + c.nbPoint);
+            //System.out.println("Center x : " + c.centerx);
+            //System.out.println("center y : " + c.centery);
+            //System.out.println("Nb : " + +c.nCluster);
+            //System.out.println("Nombre de points : " + c.nbPoint);
         }
 
     }
@@ -188,14 +188,14 @@ public class Kmean {
 
     public void printHash() {
 
-        System.out.println("AFFICHAGE DE LA HASHMAP");
+        //System.out.println("AFFICHAGE DE LA HASHMAP");
 
         Set cles = this.map.entrySet();
         Iterator it = cles.iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            System.out.println(pair.getKey());
-            System.out.println(pair.getValue());
+          //  System.out.println(pair.getKey());
+            //System.out.println(pair.getValue());
         }
 
     }

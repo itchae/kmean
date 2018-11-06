@@ -18,14 +18,15 @@ public class File {
         int nbPoints = 0;
         Scanner scanner1 = new Scanner(file);
         String lineX = scanner1.nextLine();
+        String[] resX = lineX.split("\\s+");
         String lineY = scanner1.nextLine();
-        String[] resX = lineX.split(" +");
-        String[] resY = lineX.split(" +");
-        for (int i = 0; i < resX.length; i++) {
+        String[] resY = lineY.split("\\s+");
+       
+        for (int i=1; i<resX.length;i++){
             k.dataSet.add(new Data(Double.parseDouble(resX[i]), Double.parseDouble(resY[i])));
-            // System.out.println(k.dataSet.size());
-            // System.out.println("x : " + resX[i]);
-            // System.out.println("y : " + resY[i]);
+            //System.out.println(k.dataSet.size());
+            //System.out.println("x : " + resX[i]);
+            //System.out.println("y : " + resY[i]);
             nbPoints++;
         }
         return nbPoints;

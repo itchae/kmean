@@ -4,6 +4,7 @@ import java.util.*;
 import javafx.util.Pair;
 import java.lang.*;
 
+@SuppressWarnings("unchecked")
 public class Data {
     public Pair<Double, Double> coord;
 
